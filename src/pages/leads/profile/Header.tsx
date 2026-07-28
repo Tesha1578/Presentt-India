@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Ban, Check, RotateCcw } from 'lucide-react';
+import { Ban, Check, Pencil, RotateCcw } from 'lucide-react';
 import Avatar from '@/components/Avatar';
 import GlassModal from '@/components/GlassModal';
 import QuickActionDock from '@/components/QuickActionDock';
@@ -123,9 +123,21 @@ export default function Header({ lead, onStageAdvance, onMarkInvalid, onReactiva
         <div className="flex items-start gap-4">
           <Avatar name={lead.companyName ?? `Lead ${lead.id}`} size={72} className="rounded-[20px]" />
           <div className="min-w-0">
-            <h2 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-primary">
-              {lead.companyName ?? 'Unnamed lead'}
-            </h2>
+            <div className="flex items-center gap-3">
+              <h2 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-primary">
+                {lead.companyName ?? 'Unnamed lead'}
+              </h2>
+              {onEdit && (
+                <button
+                  type="button"
+                  onClick={onEdit}
+                  title="Edit Lead Details"
+                  className="flex items-center gap-1 rounded-full bg-surface-2 px-3 py-1 text-[12px] font-semibold text-secondary transition-colors hover:bg-surface-3 hover:text-primary"
+                >
+                  <Pencil size={12} /> Edit
+                </button>
+              )}
+            </div>
             <p className="mt-1 text-[14px] text-secondary">
               {[lead.contactPerson, lead.designation].filter(Boolean).join(' · ') || 'No contact added yet'}
             </p>

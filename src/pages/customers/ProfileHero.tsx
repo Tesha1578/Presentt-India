@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import {
-  ArrowUpRight, CalendarPlus, FileText, IndianRupee, MapPin,
+  ArrowUpRight, CalendarPlus, FileText, IndianRupee, MapPin, Pencil,
 } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import Avatar from '@/components/Avatar';
@@ -33,6 +33,7 @@ interface ProfileHeroProps {
   paymentHealth: PaymentHealth;
   avgDelay: number | null;
   inactiveDays: number | null;
+  onEdit?: () => void;
 }
 
 /** Hero card — identity · health ring · revenue · payment status · quick actions. */
@@ -81,9 +82,21 @@ export default function ProfileHero({
           <div className="flex items-center gap-4">
             <Avatar name={c.name} size={72} />
             <div>
-              <h2 className="font-display text-[28px] font-bold tracking-[-0.02em] text-primary">
-                {c.name}
-              </h2>
+              <div className="flex items-center gap-3">
+                <h2 className="font-display text-[28px] font-bold tracking-[-0.02em] text-primary">
+                  {c.name}
+                </h2>
+                {onEdit && (
+                  <button
+                    type="button"
+                    onClick={onEdit}
+                    title="Edit Customer Details"
+                    className="flex items-center gap-1 rounded-full bg-surface-2 px-3 py-1 text-[12px] font-semibold text-secondary transition-colors hover:bg-surface-3 hover:text-primary"
+                  >
+                    <Pencil size={12} /> Edit
+                  </button>
+                )}
+              </div>
               <p className="mt-0.5 text-[12px] font-semibold uppercase tracking-[0.08em] text-muted tabular">
                 {c.id} · GSTIN {c.gstin}
               </p>

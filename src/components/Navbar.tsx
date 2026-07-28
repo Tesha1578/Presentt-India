@@ -3,12 +3,13 @@ import { Link, NavLink } from 'react-router';
 import { motion } from 'framer-motion';
 import {
   BarChart3, Building2, LayoutDashboard, LogIn, LogOut, MapPin,
-  MessageSquareWarning, Settings, Users,
+  MessageSquareWarning, Moon, Settings, Sun, Users,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Avatar from '@/components/Avatar';
 import { useAuth } from '@/hooks/useAuth';
+import { useTheme } from '@/lib/theme';
 import { LOGIN_PATH } from '@/const';
 
 const NAV_ITEMS: { to: string; label: string; icon: LucideIcon }[] = [
@@ -25,6 +26,7 @@ const NAV_ITEMS: { to: string; label: string; icon: LucideIcon }[] = [
 export default function Navbar() {
   const [expanded, setExpanded] = useState(false);
   const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <motion.nav
@@ -85,8 +87,27 @@ export default function Navbar() {
         ))}
       </div>
 
-      {/* Bottom: role chip + avatar + auth slot */}
+      {/* Bottom: theme toggle + role chip + avatar + auth slot */}
       <div className="flex flex-col gap-2.5 border-t border-line p-3">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          className="flex h-10 items-center gap-3.5 rounded-[16px] px-[13px] text-muted transition-colors hover:bg-surface-2 hover:text-primary"
+        >
+          {theme === 'dark' ? (
+            <Sun size={18} strokeWidth={1.75} className="shrink-0 text-warning" />
+          ) : (
+            <Moon size={18} strokeWidth={1.75} className="shrink-0 text-accent" />
+          )}
+          <motion.span
+            animate={{ opacity: expanded ? 1 : 0 }}
+            transition={{ duration: 0.15 }}
+            className="whitespace-nowrap text-[13px] font-semibold"
+          >
+            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+          </motion.span>
+        </button>
         {isLoading ? (
           /* Neutral placeholder while the session resolves */
           <div className="flex items-center gap-3 px-1">

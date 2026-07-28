@@ -17,6 +17,7 @@ import AiSummary from '@/pages/leads/profile/AiSummary';
 import { NotesPanel, TasksPanel, TimelinePanel, initialTasks } from '@/pages/leads/profile/TimelinePanels';
 import type { Task } from '@/pages/leads/profile/TimelinePanels';
 import { EmailsPanel, FilesPanel, MeetingsPanel } from '@/pages/leads/profile/CollabPanels';
+import EditLeadModal from '@/components/leads/EditLeadModal';
 import { MapsPanel, QuotationsPanel } from '@/pages/leads/profile/GeoQuotePanels';
 
 type TabId = 'timeline' | 'notes' | 'tasks' | 'meetings' | 'files' | 'emails' | 'maps' | 'quotations';
@@ -65,6 +66,7 @@ export default function LeadProfile() {
 
   const [tab, setTab] = useState<TabId>('timeline');
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [editOpen, setEditOpen] = useState(false);
 
   useEffect(() => {
     if (lead) setTasks(initialTasks(lead));
@@ -184,7 +186,13 @@ export default function LeadProfile() {
         </button>
 
         {/* A. Header */}
-        <Header lead={lead} onStageAdvance={stageAdvance} onMarkInvalid={markInvalid} onReactivate={reactivate} />
+        <Header
+          lead={lead}
+          onStageAdvance={stageAdvance}
+          onMarkInvalid={markInvalid}
+          onReactivate={reactivate}
+          onEdit={() => setEditOpen(true)}
+        />
 
         {/* B + C */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
@@ -239,6 +247,13 @@ export default function LeadProfile() {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <EditLeadModal
+        lead={lead}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        onSuccess={invalidate}
+      />
     </div>
   );
 }

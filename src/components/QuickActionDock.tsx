@@ -30,7 +30,7 @@ export default function QuickActionDock({ phone, email, mapsLink, onSchedule, cl
           href={href}
           target={href?.startsWith('http') ? '_blank' : undefined}
           rel="noreferrer"
-          aria-label={label} title={label}
+          aria-label={label}
           title={label}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.94 }}
@@ -41,7 +41,7 @@ export default function QuickActionDock({ phone, email, mapsLink, onSchedule, cl
       ))}
       <motion.button
         type="button"
-        aria-label="Schedule visit" title="Schedule visit"
+        aria-label="Schedule visit"
         title="Schedule visit"
         onClick={onSchedule}
         whileHover={{ scale: 1.1 }}

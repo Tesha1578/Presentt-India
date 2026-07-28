@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { Building } from 'lucide-react';
 import { trpc } from '@/lib/trpc-shim';
+import EditCustomerModal from '@/components/customers/EditCustomerModal';
 import EmptyState from '@/components/EmptyState';
 import {
   CATEGORY_LABELS,
@@ -43,6 +44,7 @@ function ProfileShimmer() {
 
 export default function CustomerProfile() {
   const { id } = useParams();
+  const [editOpen, setEditOpen] = useState(false);
   const detailQuery = trpc.customers.byId.useQuery(
     { id: id ?? '' },
     { enabled: !!id, staleTime: 30_000 },
@@ -167,6 +169,7 @@ export default function CustomerProfile() {
         paymentHealth={derived.paymentHealth}
         avgDelay={derived.avgDelay}
         inactiveDays={derived.inactiveDays}
+        onEdit={() => setEditOpen(true)}
       />
 
       {/* B. AI stack + C. Health explainer */}
@@ -195,6 +198,12 @@ export default function CustomerProfile() {
 
       {/* J. Communication log */}
       <CommunicationLog customer={customer} />
+
+      <EditCustomerModal
+        customer={customer}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+      />
     </div>
   );
 }
