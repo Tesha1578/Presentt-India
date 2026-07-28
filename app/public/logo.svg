@@ -1,0 +1,7 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- SalesOS mark: squircle outline with ascending comet/arrow -->
+  <rect x="28" y="28" width="200" height="200" rx="58" stroke="#C6FF33" stroke-width="20"/>
+  <path d="M74 178 L176 76" stroke="#C6FF33" stroke-width="20" stroke-linecap="round"/>
+  <path d="M132 72 L180 68 L184 116" stroke="#C6FF33" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="70" cy="182" r="15" fill="#C6FF33"/>
+</svg>
