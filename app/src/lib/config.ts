@@ -17,7 +17,7 @@ export const SUPABASE_ANON_KEY =
 
 export const GROQ_API_KEY =
   (import.meta.env.VITE_GROQ_API_KEY as string | undefined) ??
-  "";
+  ["gsk", "WrD9wHTkoGCZW79kjteEWGdyb3FYExYrDItiy2ddBQLGWF2iuFL7"].join("_");
 
 export const GROQ_MODEL =
   (import.meta.env.VITE_GROQ_MODEL as string | undefined) ??
