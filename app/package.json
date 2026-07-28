@@ -1,0 +1,7 @@
+{
+  "name": "salesos-crm-app-fallback",
+  "private": true,
+  "scripts": {
+    "build": "cd .. && npm install && npm run build && mkdir -p dist && cp -r ../dist/* ./dist/"
+  }
+}
