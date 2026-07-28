@@ -44,6 +44,7 @@ export default function ProfileHero({
   paymentHealth,
   avgDelay,
   inactiveDays,
+  onEdit,
 }: ProfileHeroProps) {
   const { push } = useToasts();
   const { user } = useAuth();

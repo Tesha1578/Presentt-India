@@ -94,7 +94,7 @@ interface HeaderProps {
 }
 
 /** A — profile header: identity + stage stepper + metadata stack + quick actions. */
-export default function Header({ lead, onStageAdvance, onMarkInvalid, onReactivate }: HeaderProps) {
+export default function Header({ lead, onStageAdvance, onMarkInvalid, onReactivate, onEdit }: HeaderProps) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [reason, setReason] = useState('');
   const invalid = lead.status === 'invalid_customer';
