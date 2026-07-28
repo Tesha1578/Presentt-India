@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { CalendarClock, CalendarDays, Map as MapIcon, MapPin, NotebookPen } from 'lucide-react';
 import EmptyState from '@/components/EmptyState';
 import FilterPills from '@/components/FilterPills';
@@ -58,6 +58,7 @@ function VisitsSkeleton() {
 
 /** Personal Visit Management — route `/visits`. */
 export default function Visits() {
+  const navigate = useNavigate();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const enabled = isAuthenticated;
   const { push } = useToasts();
@@ -229,7 +230,7 @@ export default function Visits() {
           title="Sign in to manage visits"
           body="Region dashboards, overdue reminders, routes and the visit log need a signed-in session."
           ctaLabel="Sign in"
-          onCta={() => undefined}
+          onCta={() => navigate(LOGIN_PATH)}
         />
         <Link to={LOGIN_PATH} className="sr-only">
           Sign in
